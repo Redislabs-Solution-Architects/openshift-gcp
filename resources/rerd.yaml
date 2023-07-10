@@ -1,0 +1,10 @@
+apiVersion: app.redislabs.com/v1alpha1
+kind: RedisEnterpriseActiveActiveDatabase
+metadata:
+  name: REPLACE_ME
+spec:
+  participatingClusters:
+    - name: rerc1
+    - name: rerc2
+  globalConfigurations:
+    shardCount: 1

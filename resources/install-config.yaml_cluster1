@@ -1,0 +1,39 @@
+additionalTrustBundlePolicy: Proxyonly
+apiVersion: v1
+baseDomain: openshift.demo.redislabs.com
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  platform:
+    gcp:
+      type: e2-standard-8
+  replicas: 3
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform:
+    gcp:
+      type: e2-standard-4
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: REPLACE_ME_WITH_GOOD_NAME
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.0.0.0/16
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  gcp:
+    projectID: central-beach-194106
+    region: REPLACE_ME_WITH_REGION
+publish: External
+pullSecret: 'REPLACE_ME_WITH_PULL_SECRET'
+sshKey: |
+  ssh-rsa REPLACE_ME_WITH_SSH_KEY
