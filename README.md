@@ -47,3 +47,21 @@ Next, extract the installer
 ```
 tar xvf openshift-install-linux.tar.gz
 ```
+Next, download and extract the supporting yaml files. We've given you a head start, but you'll have to edit them to set
+names and regions specific to your environment. Search for `REPLACE_ME` in the various files found here:
+[Support YAML](./resources/openshift-deploy-yaml.tar.gz)
+```
+tar xvf openshift-deploy-yaml.tar.gz
+```
+
+Create a new folder for the cluster config and copy the cluster1 config file there
+```
+mkdir openshift-cluster1-conf
+cp install-config.yaml_cluster1 openshift-cluster1-conf/install-config.yaml
+# Update the copied file with your names and region
+```
+
+Create the OpenShift cluster. This may take more than 30 minutes. Things will fail quickly if you don't have the right permissions.
+```
+./openshift-install create cluster --dir ~/openshift-cluster1-conf
+```
