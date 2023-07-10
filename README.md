@@ -51,7 +51,9 @@ Next, download and extract the supporting yaml files. We've given you a head sta
 names and regions specific to your environment. Search for `REPLACE_ME` in the various files found here:
 [Support YAML](./resources/openshift-deploy-yaml.tar.gz)
 ```
-wget https://github.com/Redislabs-Solution-Architects/openshift-gcp/blob/main/resources/openshift-deploy-yaml.tar.gz
+# wget or curl should work but for some reason the file type is not recognized as gzip/tar
+# for now scp the file over
+# wget https://github.com/Redislabs-Solution-Architects/openshift-gcp/blob/main/resources/openshift-deploy-yaml.tar.gz
 tar xvf openshift-deploy-yaml.tar.gz
 ```
 
