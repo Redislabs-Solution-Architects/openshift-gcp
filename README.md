@@ -26,12 +26,17 @@ there are many variations on this theme you can take.
     I used `wget` to download the file on my jump host.
 7. Download the OpenShift Installer for Linux x86_64 https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-install-linux.tar.gz
 8. Download or copy your `Pull Secret` which you'll use later. You'll need to get that to your jump host. Either copy/paste in a `vi` session or use `scp`
-9. Install the oc cli by untarring the client tar file.
+9. You need to generate an SSH secret for the installer to ssh into the other servers it creates. You'll copy the contents of the id_rsa.pub it generates into the config yaml file later
+   ```
+   # Take the defaults. It will create two files in ~/.ssh - id_rsa and id_rsa.pub
+   ssh-keygen
+   ```
+10. Install the oc cli by untarring the client tar file.
 
-   ```
-   tar xvf openshift-client-linux.tar.gz
-   ```
-    Rename the README.md if you want to refer to it later.
+    ```
+    tar xvf openshift-client-linux.tar.gz
+    ```
+     Rename the README.md if you want to refer to it later.
 
 ### Service account key
 You'll need to generate a key (json) from the proper service account with all the right permissions. 
@@ -47,21 +52,17 @@ Next, extract the installer
 ```
 tar xvf openshift-install-linux.tar.gz
 ```
-Next, download and extract the supporting yaml files. We've given you a head start, but you'll have to edit them to set
-names and regions specific to your environment. Search for `REPLACE_ME` in the various files found here:
-[Support YAML](./resources/openshift-deploy-yaml.tar.gz)
+Next, download the supporting yaml config files. We've given you a head start, but you'll have to edit them to set
+names and regions specific to your environment. Search for `REPLACE_ME` in the various files found in this repo under `resources`
 ```
-# wget or curl should work but for some reason the file type is not recognized as gzip/tar
-# for now scp the file over
-# wget https://github.com/Redislabs-Solution-Architects/openshift-gcp/blob/main/resources/openshift-deploy-yaml.tar.gz
-tar xvf openshift-deploy-yaml.tar.gz
+git clone https://github.com/Redislabs-Solution-Architects/openshift-gcp.git
 ```
 
 Create a new folder for the cluster config and copy the cluster1 config file there
 ```
 mkdir openshift-cluster1-conf
-cp install-config.yaml_cluster1 openshift-cluster1-conf/install-config.yaml
-# Update the copied file with your names and region
+cp openshift-gcp/install-config.yaml_cluster1 openshift-cluster1-conf/install-config.yaml
+# Update the copied file, install-config.yaml, with your names and region, pull secret and ssh public key.
 ```
 
 Create the OpenShift cluster. This may take more than 30 minutes. Things will fail quickly if you don't have the right permissions.
